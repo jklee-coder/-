@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线购物平台</title>
+    <style>
+      /* 基础样式 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* 导航栏样式 */
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 1.5rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #3498db;
+      }
+
+      /* 主要内容区域 */
+      .main-content {
+        padding: 2rem 0;
+        min-height: calc(100vh - 140px);
+      }
+
+      /* 商品网格 */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .product-info {
+        padding: 1rem;
+      }
+
+      .product-name {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-price {
+        color: #e74c3c;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #3498db;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .btn:hover {
+        background: #2980b9;
+      }
+
+      .btn-danger {
+        background: #e74c3c;
+      }
+
+      .btn-danger:hover {
+        background: #c0392b;
+      }
+
+      /* 表单样式 */
+      .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      /* 页脚 */
+      footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 导航栏 -->
+    <header>
+      <div class="container">
+        <nav>
+          <div class="logo">在线购物平台</div>
+          <ul class="nav-links">
+            <li><a href="购物平台.html">首页</a></li>
+            <li><a href="products.html">商品</a></li>
+            <li><a href="cart.html">购物车</a></li>
+            <li><a href="orders.html">我的订单</a></li>
+            <li id="loginLink"><a href="login.html">登录/注册</a></li>
+            <!-- 移除管理后台链接 -->
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+      <div class="container">
+        <!-- 页面内容将在这里动态加载 -->
+        <h1>欢迎来到在线购物平台</h1>
+        <p>请选择一个功能开始使用</p>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 在线购物平台 - 课程设计项目</p>
+      </div>
+    </footer>
+
+    <script>
+      // 基础JavaScript功能
+      document.addEventListener("DOMContentLoaded", function () {
+        // 这里可以添加页面初始化逻辑
+        console.log("在线购物平台已加载");
+
+        // 示例：模拟获取商品数据
+        // 实际开发中这里应该是AJAX请求
+        // fetchProducts();
+      });
+
+      // 示例函数：获取商品列表
+      function fetchProducts() {
+        // 实际开发中这里应该是AJAX请求后端API
+        fetch("/api/products")
+          .then((response) => response.json())
+          .then((products) => {
+            // 渲染商品列表
+            renderProducts(products);
+          })
+          .catch((error) => {
+            console.error("获取商品数据失败:", error);
+          });
+      }
+      // 示例函数：渲染商品列表
+      function renderProducts(products) {
+        const container = document.querySelector(".container");
+        let html = '<h2>商品列表</h2><div class="products-grid">';
+
+        products.forEach((product) => {
+          html += `
+                    <div class="product-card">
+                        <img src="${product.image_url}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+<div class="product-name">${product.name}</div>
+                            <div class="product-price">¥${product.price}</div>
+                            <button class="btn" onclick="addToCart(${product.id})">加入购物车</button>
+                        </div>
+                    </div>
+                `;
+        });
+
+        html += "</div>";
+        container.innerHTML = html;
+      }
+
+      // 示例函数：添加到购物车
+      function addToCart(productId) {
+        // 实际开发中这里应该是AJAX请求
+        fetch("/api/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: productId,
+            quantity: 1,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert("商品已添加到购物车");
+          })
+          .catch((error) => {
+            console.error("添加到购物车失败:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线购物平台</title>
+    <style>
+      /* 基础样式 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* 导航栏样式 */
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 1.5rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #3498db;
+      }
+
+      /* 主要内容区域 */
+      .main-content {
+        padding: 2rem 0;
+        min-height: calc(100vh - 140px);
+      }
+
+      /* 商品网格 */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .product-info {
+        padding: 1rem;
+      }
+
+      .product-name {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-price {
+        color: #e74c3c;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #3498db;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .btn:hover {
+        background: #2980b9;
+      }
+
+      .btn-danger {
+        background: #e74c3c;
+      }
+
+      .btn-danger:hover {
+        background: #c0392b;
+      }
+
+      /* 表单样式 */
+      .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      /* 页脚 */
+      footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 导航栏 -->
+    <header>
+      <div class="container">
+        <nav>
+          <div class="logo">在线购物平台</div>
+          <ul class="nav-links">
+            <li><a href="购物平台.html">首页</a></li>
+            <li><a href="products.html">商品</a></li>
+            <li><a href="cart.html">购物车</a></li>
+            <li><a href="orders.html">我的订单</a></li>
+            <li id="loginLink"><a href="login.html">登录/注册</a></li>
+            <!-- 移除管理后台链接 -->
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+      <div class="container">
+        <!-- 页面内容将在这里动态加载 -->
+        <h1>欢迎来到在线购物平台</h1>
+        <p>请选择一个功能开始使用</p>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 在线购物平台 - 课程设计项目</p>
+      </div>
+    </footer>
+
+    <style>
+      /* 用户菜单样式 */
+      .user-menu {
+        position: relative;
+        display: inline-block;
+      }
+
+      .user-name {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        transition: background 0.3s;
+      }
+
+      .user-name:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background: white;
+        min-width: 160px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+        right: 0;
+        top: 100%;
+      }
+
+      .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background 0.3s;
+      }
+
+      .dropdown-content a:hover {
+        background: #f5f5f5;
+      }
+
+      .dropdown-content a.danger {
+        color: #e74c3c;
+      }
+
+      .user-menu:hover .dropdown-content {
+        display: block;
+      }
+    </style>
+
+    <script>
+      // 页面加载时检查登录状态
+      document.addEventListener("DOMContentLoaded", function () {
+        updateNavigation();
+      });
+
+      function updateNavigation() {
+        const userName = localStorage.getItem("userName");
+        const token = localStorage.getItem("token");
+        const loginLink = document.getElementById("loginLink");
+
+        if (token && userName) {
+          // 用户已登录，显示用户名和下拉菜单
+          loginLink.innerHTML = `
+            <div class="user-menu">
+              <span class="user-name">${userName}</span>
+              <div class="dropdown-content">
+                <a href="#" onclick="logout()">退出登录</a>
+                <a href="#" onclick="deleteAccount()" class="danger">注销账号</a>
+              </div>
+            </div>
+          `;
+        } else {
+          // 用户未登录，显示登录/注册链接
+          loginLink.innerHTML = '<a href="login.html">登录/注册</a>';
+        }
+      }
+
+      // 退出登录功能
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userName");
+        alert("已退出登录");
+        window.location.reload();
+      }
+
+      // 注销账号功能
+      function deleteAccount() {
+        if (
+          confirm(
+            "重要提醒：注销账号操作不可逆，请谨慎使用\n\n确定要注销账号吗？"
+          )
+        ) {
+          const token = localStorage.getItem("token");
+
+          fetch("http://localhost:3000/api/user/account", {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.message) {
+                alert(data.message);
+                localStorage.removeItem("token");
+                localStorage.removeItem("userEmail");
+                localStorage.removeItem("userName");
+                window.location.reload();
+              } else {
+                alert("注销失败: " + data.error);
+              }
+            })
+            .catch((error) => {
+              console.error("注销错误:", error);
+              alert("注销失败，请检查网络连接");
+            });
+        }
+      }
+    </script>
+  </body>
+</html>
